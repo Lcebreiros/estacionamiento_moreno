@@ -818,7 +818,7 @@
                         </div>
                     </div>
                     <p class="text-sm text-slate-400 leading-relaxed">
-                        Tu vehículo seguro en el corazón de Lanús. Monitoreo 24/7, techado y con las mejores tarifas de la zona.
+                        Tu vehículo seguro en el corazón de Lanús. Monitoreo constante y con las mejores tarifas de la zona.
                     </p>
                 </div>
 
@@ -850,12 +850,6 @@
                                     echo '+' . $number;
                                 }
                             @endphp
-                        </a>
-                        <a href="mailto:info@estacionamientomoreno.com" class="flex items-center gap-2 text-slate-400 hover:text-yellow-400 transition">
-                            <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                            info@estacionamientomoreno.com
                         </a>
                     </div>
                 </div>
