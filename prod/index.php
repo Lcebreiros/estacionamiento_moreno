@@ -16,7 +16,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../estacionamiento-moreno/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__.'/estacionamiento_moreno/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -31,7 +31,7 @@ if (file_exists($maintenance = __DIR__.'/../estacionamiento-moreno/storage/frame
 |
 */
 
-require __DIR__.'/../estacionamiento-moreno/vendor/autoload.php';
+require __DIR__.'/estacionamiento_moreno/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ require __DIR__.'/../estacionamiento-moreno/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../estacionamiento-moreno/bootstrap/app.php';
+$app = require_once __DIR__.'/estacionamiento_moreno/bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
