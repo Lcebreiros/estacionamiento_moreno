@@ -6,6 +6,8 @@
     <title>Estacionamiento Moreno | Seguro, rápido y con beneficios</title>
     <meta name="description" content="Estacionamiento techado. Tarifas claras, monitoreo 24/7, bonificaciones con restaurantes vecinos y atención personalizada.">
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
