@@ -43,8 +43,6 @@ return new class extends Migration
                     'https://images.unsplash.com/photo-1590674899484-d5640e854abe?w=800',
                     'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=800',
                 ]),
-                'whatsapp_number' => '541123456789',
-                'instagram_url' => 'https://instagram.com',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

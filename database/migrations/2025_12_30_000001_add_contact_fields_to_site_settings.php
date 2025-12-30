@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -16,6 +17,14 @@ return new class extends Migration
                 $table->string('instagram_url')->nullable()->after('whatsapp_number');
             }
         });
+
+        // Set default values for existing record
+        DB::table('site_settings')
+            ->whereNull('whatsapp_number')
+            ->update([
+                'whatsapp_number' => '541123456789',
+                'instagram_url' => 'https://instagram.com',
+            ]);
     }
 
     public function down(): void
