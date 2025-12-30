@@ -227,6 +227,69 @@
         </div>
     </section>
 
+    <!-- Sección Conócenos con Carrusel -->
+    <section id="conocenos" class="py-24 relative">
+        @if(empty($theme['hero_background_url']))
+        <div class="section-overlay bg-slate-900"></div>
+        @endif
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Carrusel de imágenes -->
+                <div class="carousel-container h-[500px] shadow-2xl">
+                    @foreach ($theme['carousel_images'] as $i => $img)
+                        <div class="carousel-slide {{ $i === 0 ? 'active' : '' }}" style="background-image: url('{{ $img }}')"></div>
+                    @endforeach
+
+                    <!-- Indicadores -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" data-slide="0"></button>
+                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" data-slide="1"></button>
+                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" data-slide="2"></button>
+                    </div>
+                </div>
+
+                <!-- Contenido -->
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-yellow-400 font-semibold text-sm uppercase tracking-wider mb-3">Sobre nosotros</p>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                            Más que un estacionamiento, tu tranquilidad
+                        </h2>
+                        <p class="text-lg text-slate-300 leading-relaxed">
+                            Nuestras instalaciones techadas, sistema de vigilancia HD y personal capacitado garantizan que tu auto esté seguro mientras disfrutás de tu tiempo.
+                        </p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="glass p-5 rounded-xl bg-slate-900/75">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold mb-1">Seguridad Total</h3>
+                            <p class="text-sm text-slate-400">Cámaras HD, seguro y vigilancia humana permanente</p>
+                        </div>
+
+                        <div class="glass p-5 rounded-xl bg-slate-900/75">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold mb-1">Acceso Rápido</h3>
+                            <p class="text-sm text-slate-400">Entrada y salida por ambas calles</p>
+                        </div>
+                    </div>
+
+                    <p class="pt-2 text-slate-300 text-sm">
+                        Atención personalizada, instalaciones iluminadas y convenios con locales de la zona.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Horarios de Atención -->
     <section id="horarios" class="py-20 relative overflow-hidden">
         @if(empty($theme['hero_background_url']))
@@ -345,69 +408,6 @@
                 <div>
                     <p class="text-white font-semibold mb-1">Horarios sujetos a cambios</p>
                     <p class="text-sm text-slate-300">Los horarios pueden variar en días feriados. Contactanos para confirmar disponibilidad.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Conócenos con Carrusel -->
-    <section id="conocenos" class="py-24 relative">
-        @if(empty($theme['hero_background_url']))
-        <div class="section-overlay bg-slate-900"></div>
-        @endif
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Carrusel de imágenes -->
-                <div class="carousel-container h-[500px] shadow-2xl">
-                    @foreach ($theme['carousel_images'] as $i => $img)
-                        <div class="carousel-slide {{ $i === 0 ? 'active' : '' }}" style="background-image: url('{{ $img }}')"></div>
-                    @endforeach
-
-                    <!-- Indicadores -->
-                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" data-slide="0"></button>
-                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" data-slide="1"></button>
-                        <button class="carousel-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition" data-slide="2"></button>
-                    </div>
-                </div>
-
-                <!-- Contenido -->
-                <div class="space-y-6">
-                    <div>
-                        <p class="text-yellow-400 font-semibold text-sm uppercase tracking-wider mb-3">Sobre nosotros</p>
-                        <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                            Más que un estacionamiento, tu tranquilidad
-                        </h2>
-                        <p class="text-lg text-slate-300 leading-relaxed">
-                            Nuestras instalaciones techadas, sistema de vigilancia HD y personal capacitado garantizan que tu auto esté seguro mientras disfrutás de tu tiempo.
-                        </p>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <div class="glass p-5 rounded-xl bg-slate-900/75">
-                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-3">
-                                <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                                </svg>
-                            </div>
-                            <h3 class="font-bold mb-1">Seguridad Total</h3>
-                            <p class="text-sm text-slate-400">Cámaras HD, seguro y vigilancia humana permanente</p>
-                        </div>
-
-                        <div class="glass p-5 rounded-xl bg-slate-900/75">
-                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-3">
-                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                                </svg>
-                            </div>
-                            <h3 class="font-bold mb-1">Acceso Rápido</h3>
-                            <p class="text-sm text-slate-400">Entrada y salida por ambas calles</p>
-                        </div>
-                    </div>
-
-                    <p class="pt-2 text-slate-300 text-sm">
-                        Atención personalizada, instalaciones iluminadas y convenios con locales de la zona.
-                    </p>
                 </div>
             </div>
         </div>
@@ -994,6 +994,12 @@
             <div class="pt-8 border-t border-white/10">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
                     <p>© {{ date('Y') }} Estacionamiento Moreno. Todos los derechos reservados.</p>
+                    <p class="flex flex-wrap items-center gap-2">
+                        <span>Sitio desarrollado por Leandro Cebreiros.</span>
+                        <a href="https://www.leandrocebreiros.com.ar" target="_blank" rel="noopener" class="text-yellow-400 hover:text-yellow-300 underline">
+                            www.leandrocebreiros.com.ar
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
