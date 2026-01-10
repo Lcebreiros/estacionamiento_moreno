@@ -154,7 +154,7 @@
 
     <!-- Header -->
     <header class="fixed top-0 w-full z-50 glass shadow-lg shadow-black/10">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
             <div class="flex items-center gap-4">
                 <img src="{{ asset('images/logo-estacionamiento.png') }}" alt="Estacionamiento Moreno" class="max-w-full max-h-full object-contain"
                      style="width: 7.9rem; height: 4.4rem; max-width: 7.9rem; max-height: 4.4rem; display: block; margin: 0;">
@@ -193,6 +193,19 @@
                 @endif
             </div>
 
+            <!-- Indicador centrado para móviles -->
+            @if($isCurrentlyOpen)
+                <div class="flex md:hidden absolute left-1/2 -translate-x-1/2 items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/15 border border-green-500/30">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-semibold text-green-300">Abierto</span>
+                </div>
+            @else
+                <div class="flex md:hidden absolute left-1/2 -translate-x-1/2 items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30">
+                    <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+                    <span class="text-xs font-semibold text-red-300">Cerrado</span>
+                </div>
+            @endif
+
             <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
                 <a href="#inicio" class="text-slate-200 hover:text-yellow-400 transition">Inicio</a>
                 <a href="#conocenos" class="text-slate-200 hover:text-yellow-400 transition">Conócenos</a>
@@ -214,17 +227,6 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
             <div class="px-6 py-4 space-y-3">
-                @if($isCurrentlyOpen)
-                    <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-green-500/15 border border-green-500/30 w-fit">
-                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                        <span class="text-xs font-semibold text-green-300">Abierto ahora</span>
-                    </div>
-                @else
-                    <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-red-500/15 border border-red-500/30 w-fit">
-                        <span class="w-2 h-2 bg-red-400 rounded-full"></span>
-                        <span class="text-xs font-semibold text-red-300">Cerrado ahora</span>
-                    </div>
-                @endif
                 <a href="#inicio" class="block py-2 text-slate-200 hover:text-yellow-400">Inicio</a>
                 <a href="#conocenos" class="block py-2 text-slate-200 hover:text-yellow-400">Conócenos</a>
                 <a href="#horarios" class="block py-2 text-slate-200 hover:text-yellow-400">Horarios</a>
