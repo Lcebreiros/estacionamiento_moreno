@@ -155,8 +155,43 @@
     <!-- Header -->
     <header class="fixed top-0 w-full z-50 glass shadow-lg shadow-black/10">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <img src="{{ asset('images/logo-estacionamiento.png') }}" alt="Estacionamiento Moreno" class="max-w-full max-h-full object-contain"
-                 style="width: 7.9rem; height: 4.4rem; max-width: 7.9rem; max-height: 4.4rem; display: block; margin: 0;">
+            <div class="flex items-center gap-4">
+                <img src="{{ asset('images/logo-estacionamiento.png') }}" alt="Estacionamiento Moreno" class="max-w-full max-h-full object-contain"
+                     style="width: 7.9rem; height: 4.4rem; max-width: 7.9rem; max-height: 4.4rem; display: block; margin: 0;">
+
+                @php
+                    $todaySchedule = $weeklySchedules->where('day_of_week', now()->dayOfWeek)->first();
+                    $isCurrentlyOpen = false;
+
+                    if ($todaySchedule && $todaySchedule->is_open) {
+                        if ($todaySchedule->is_24_hours) {
+                            $isCurrentlyOpen = true;
+                        } else {
+                            $currentTime = now()->format('H:i');
+                            $openingTime = substr($todaySchedule->opening_time, 0, 5);
+                            $closingTime = substr($todaySchedule->closing_time, 0, 5);
+
+                            if ($closingTime < $openingTime) {
+                                $isCurrentlyOpen = ($currentTime >= $openingTime || $currentTime < $closingTime);
+                            } else {
+                                $isCurrentlyOpen = ($currentTime >= $openingTime && $currentTime < $closingTime);
+                            }
+                        }
+                    }
+                @endphp
+
+                @if($isCurrentlyOpen)
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/15 border border-green-500/30">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-xs font-semibold text-green-300">Abierto</span>
+                    </div>
+                @else
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30">
+                        <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+                        <span class="text-xs font-semibold text-red-300">Cerrado</span>
+                    </div>
+                @endif
+            </div>
 
             <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
                 <a href="#inicio" class="text-slate-200 hover:text-yellow-400 transition">Inicio</a>
@@ -179,6 +214,17 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
             <div class="px-6 py-4 space-y-3">
+                @if($isCurrentlyOpen)
+                    <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-green-500/15 border border-green-500/30 w-fit">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-xs font-semibold text-green-300">Abierto ahora</span>
+                    </div>
+                @else
+                    <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-red-500/15 border border-red-500/30 w-fit">
+                        <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+                        <span class="text-xs font-semibold text-red-300">Cerrado ahora</span>
+                    </div>
+                @endif
                 <a href="#inicio" class="block py-2 text-slate-200 hover:text-yellow-400">Inicio</a>
                 <a href="#conocenos" class="block py-2 text-slate-200 hover:text-yellow-400">Conócenos</a>
                 <a href="#horarios" class="block py-2 text-slate-200 hover:text-yellow-400">Horarios</a>
@@ -378,15 +424,12 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
                                 </div>
-                                <div class="space-y-1">
-                                    <div class="flex items-center justify-center gap-1.5">
-                                        <p class="text-green-400 font-bold text-base">{{ substr($schedule->opening_time, 0, 5) }}</p>
-                                        <svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                        </svg>
-                                        <p class="text-yellow-400 font-bold text-base">{{ substr($schedule->closing_time, 0, 5) }}</p>
-                                    </div>
-                                    <p class="text-xs text-slate-400">Abierto</p>
+                                <div class="flex items-center justify-center gap-1.5">
+                                    <p class="text-green-400 font-bold text-base">{{ substr($schedule->opening_time, 0, 5) }}</p>
+                                    <svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                    <p class="text-yellow-400 font-bold text-base">{{ substr($schedule->closing_time, 0, 5) }}</p>
                                 </div>
                             @endif
 
@@ -567,19 +610,19 @@
                     <div class="p-4 rounded-2xl transition text-center flex flex-col items-center gap-3">
                         @if($bonificacion->logo_url)
                             {{-- Si tiene logo personalizado, mostrarlo --}}
-                            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-white/10">
-                                <img src="{{ $bonificacion->logo_url }}" alt="{{ $bonificacion->name }}" class="w-10 h-10 object-contain">
+                            <div class="w-20 h-20 flex items-center justify-center rounded-xl bg-transparent">
+                                <img src="{{ $bonificacion->logo_url }}" alt="{{ $bonificacion->name }}" class="w-16 h-16 object-contain">
                             </div>
                         @else
                             {{-- Si no tiene logo, mostrar icono SVG con color --}}
-                            <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-white/10 text-{{ $bonificacion->icon_color }}-400">
+                            <div class="w-20 h-20 flex items-center justify-center rounded-xl bg-transparent text-{{ $bonificacion->icon_color }}-400">
                                 @if($bonificacion->icon_svg)
-                                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                                         {!! $bonificacion->icon_svg !!}
                                     </svg>
                                 @else
                                     {{-- Icono genérico por defecto --}}
-                                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                                     </svg>
                                 @endif
